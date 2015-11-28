@@ -63,6 +63,18 @@ return [
             'prefix'    => '',
             'strict'    => false,
         ],
+        
+        'mongodb' => array(
+		    'driver'   => 'mongodb',
+		    'host'     => env('MONGO_HOST', 'localhost'),
+		    'port'     => env('MONGO_PORT', 27017),
+		    'database' => env('MONGO_DATABASE', ''),
+		    'username' => env('MONGO_USERNAME', ''),
+		    'password' => env('MONGO_PASSWORD', ''),
+		    'options' => array(
+		        'db' => 'admin' // sets the authentication database required by mongo 3
+		    )
+		),
 
         'pgsql' => [
             'driver'   => 'pgsql',

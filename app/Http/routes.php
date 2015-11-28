@@ -18,7 +18,7 @@ Route::group( [
     'namespace' => 'Authenticated',
     'middleware' => ['auth']],
 
-    function() use ($router){
+    function() use ($router){ 
         # Dashboard Routes
         Route::get(     '/profile',                 'ProfileController@profile');
         Route::get(     '/profile/sites',           'ProfileController@sites');
@@ -54,19 +54,22 @@ Route::controllers([
 
 // Protected Routes by auth and acl middleware
 Route::group( [
-    'namespace' => 'Site',
-    'middleware' => ['mkaccess']],
-    'prefix' => '{site}',
+	    'namespace' => 'Site',
+	    'middleware' => ['mkaccess'],
+	    'prefix' => '{site}'
+    ],
 
     function() use ($router){
         # Dashboard Routes
-        
-        Route::post(         '/upload',                 'ImageController@style');
+        Route::get(          '/',                 		'DefaultController@index');
+        Route::resource(     '/settings.js',            'SettingController');
+        Route::post(         '/upload',                 'ImageController@upload');
         Route::resource(     '/user',                   'UserController');
         Route::resource(     '/item',                   'ItemController');
         Route::get(          '/cache',                  'CacheController@refresh');
-        Route::resource(     '/search',                 'Site\SearchController');
+        Route::resource(     '/search',                 'SearchController');
     }
 );
 
-Route::get(                 '/files/{site}/{style}/{image}',      'ImageController@style');
+Route::get(                 '/files/{site}/styles/{style}/{uri}',   'ImageController@style');
+Route::get(                 '/files/{site}/preview/{uri}',      	'ImageController@preview');
