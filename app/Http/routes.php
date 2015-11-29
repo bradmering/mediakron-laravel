@@ -55,7 +55,7 @@ Route::controllers([
 // Protected Routes by auth and acl middleware
 Route::group( [
 	    'namespace' => 'Site',
-	    'middleware' => ['mkaccess'],
+	    'middleware' => ['site'],
 	    'prefix' => '{site}'
     ],
 
@@ -66,7 +66,7 @@ Route::group( [
         Route::post(         '/upload',                 'ImageController@upload');
         Route::resource(     '/user',                   'UserController');
         Route::resource(     '/item',                   'ItemController');
-        Route::get(          '/cache',                  'CacheController@refresh');
+        Route::get(          '/cache',                  'CacheController@generate');
         Route::resource(     '/search',                 'SearchController');
     }
 );
